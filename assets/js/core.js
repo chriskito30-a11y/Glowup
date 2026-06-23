@@ -68,12 +68,13 @@ export async function createSession({ user, access, title, subtitle, eventDate, 
   const sessionId = `${slugify(cleanTitle)}-${randomId("").replace(/^-/, "")}`;
   const now = Date.now();
   const expiresAt = now + 24 * 60 * 60 * 1000;
+  const sessionPlanId = access?.unlimited ? "lifetime" : (access?.planId || "free");
   const session = {
     id: sessionId,
     ownerUid: user.uid,
     ownerEmail: user.email || "",
     moduleId: MODULE_ID,
-    planId: access?.planId || "free",
+    planId: sessionPlanId,
     billingPeriod,
     title: cleanTitle,
     subtitle: subtitle || "Le public devient la lumière du spectacle.",
@@ -89,11 +90,11 @@ export async function createSession({ user, access, title, subtitle, eventDate, 
     currentEffect: { id: "idle", type: "idle", color: "#111827", zone: "all", durationMs: 0, startedAt: now, label: "Repos" }
   };
 
-  await set(ref(db, `${DATA_ROOT}/${sessionId}`), session);
-  await update(ref(db, usagePath), {
-    eventsCreated: used + 1,
-    [`entities/${sessionId}`]: true,
-    updatedAt: now
+  await update(ref(db), {
+    [`${DATA_ROOT}/${sessionId}`]: session,
+    [`${usagePath}/eventsCreated`]: used + 1,
+    [`${usagePath}/entities/${sessionId}`]: true,
+    [`${usagePath}/updatedAt`]: now
   });
   return { sessionId, session };
 }
