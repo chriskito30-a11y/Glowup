@@ -1,1 +1,50 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Rejoindre GlowUp</title><meta name="theme-color" content="#111827"><link rel="icon" href="assets/img/module-glowup.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;650;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/style.css"></head><body class="participant-screen"><main id="app"><section class="join-card"><p class="eyebrow">GlowUp</p><h1 id="joinTitle">Rejoindre le show lumineux</h1><p id="joinSubtitle">Scannez, choisissez votre zone, gardez votre téléphone allumé.</p><div class="warning"><p>Des effets lumineux peuvent apparaître. Si vous êtes sensible aux lumières ou flashs, ne participez pas ou baissez la luminosité.</p></div><form id="joinForm" class="stack" style="margin-top:16px"><input name="name" maxlength="40" placeholder="Votre prénom, facultatif"><select name="zone"><option value="left">Je suis à gauche</option><option value="center" selected>Je suis au centre</option><option value="right">Je suis à droite</option></select><button class="btn btn-primary" type="submit">Entrer dans GlowUp</button><p id="status" class="status"></p></form></section></main><script type="module" src="assets/js/join.js"></script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Rejoindre GlowUp</title>
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" href="assets/img/module-glowup.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;650;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="participant-screen">
+  <main id="app">
+    <section class="join-card">
+      <p class="eyebrow">GlowUp</p>
+      <h1 id="joinTitle">Rejoindre le show lumineux</h1>
+      <p id="joinSubtitle">Scannez, choisissez votre placement, gardez votre téléphone allumé.</p>
+      <div class="warning"><p>Des effets lumineux peuvent apparaître. Si vous êtes sensible aux lumières ou flashs, ne participez pas ou baissez la luminosité.</p></div>
+      <form id="joinForm" class="stack join-form" style="margin-top:16px">
+        <input name="name" maxlength="40" placeholder="Votre prénom, facultatif">
+        <div class="field">
+          <label for="zoneSelect">Position gauche / centre / droite</label>
+          <select id="zoneSelect" name="zone">
+            <option value="left">Je suis à gauche</option>
+            <option value="center" selected>Je suis au centre</option>
+            <option value="right">Je suis à droite</option>
+          </select>
+        </div>
+        <div class="field" id="depthField">
+          <label for="depthSelect">Profondeur</label>
+          <select id="depthSelect" name="depth">
+            <option value="front">Devant</option>
+            <option value="middle" selected>Milieu</option>
+            <option value="back">Derrière</option>
+          </select>
+        </div>
+        <div class="field" id="rowField" hidden>
+          <label for="rowInput">Numéro de rangée</label>
+          <input id="rowInput" name="row" type="number" min="1" max="80" inputmode="numeric" placeholder="Ex. 4">
+        </div>
+        <button class="btn btn-primary" type="submit">Entrer dans GlowUp</button>
+        <p id="status" class="status"></p>
+      </form>
+    </section>
+  </main>
+  <script type="module" src="assets/js/join.js"></script>
+</body>
+</html>

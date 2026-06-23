@@ -1,1 +1,102 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GlowUp — Modulys</title><meta name="description" content="Transformez les téléphones du public en show lumineux interactif avec un QR code."><meta name="theme-color" content="#7c3aed"><link rel="icon" href="assets/img/module-glowup.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;650;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/style.css"></head><body><header class="header"><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark">✨</span><span>GlowUp</span></a><div class="nav-actions"><a class="btn btn-secondary" href="https://modulys.top/mes-modules.html">Mes modules</a><button id="logoutBtn" class="btn btn-ghost" type="button">Déconnexion</button></div></div></header><main class="main"><div class="container hero"><section><p class="eyebrow">Module Modulys</p><h1>Le public devient la lumière du spectacle.</h1><p class="lead">Créez une session, partagez un QR code et lancez des effets lumineux en direct sur les téléphones des participants.</p><div class="stat-grid"><article class="stat"><strong>30</strong><span>participants gratuits</span></article><article class="stat"><strong>3</strong><span>zones simples</span></article><article class="stat"><strong>24h</strong><span>session active</span></article></div><div class="warning"><p><strong>Prévention :</strong> GlowUp utilise des écrans colorés. Évitez les flashs rapides et prévenez le public sensible à la lumière.</p></div></section><aside class="hero-visual" aria-hidden="true"><div class="arena"><i class="phone-dot p1"></i><i class="phone-dot p2"></i><i class="phone-dot p3"></i><i class="phone-dot p4"></i><i class="phone-dot p5"></i></div></aside></div><section class="container grid two" style="margin-top:32px"><article class="card"><div class="dashboard-head"><div><p class="eyebrow">Créer</p><h2>Nouvelle session GlowUp</h2><p>Connecté : <strong id="userEmail">—</strong> · Plan : <strong id="planLabel">—</strong></p></div></div><form id="createForm"><div class="field"><label for="title">Titre de l’événement</label><input id="title" name="title" required maxlength="120" placeholder="Final du spectacle"></div><div class="field"><label for="subtitle">Sous-titre</label><input id="subtitle" name="subtitle" maxlength="160" placeholder="Gardez votre téléphone allumé pendant le show"></div><div class="field"><label for="eventDate">Date de l’événement</label><input id="eventDate" name="eventDate" type="date"></div><label class="warning" style="display:block"><input type="checkbox" name="warningAccepted" required> J’ai prévu d’avertir le public en cas d’effets lumineux et d’éviter les flashs trop rapides.</label><br><button class="btn btn-primary" type="submit">Créer la session</button><p id="status" class="status" role="status"></p></form><div id="limitBox"></div></article><article class="card"><p class="eyebrow">Mes sessions</p><h2>Shows créés</h2><div id="sessionsList" class="grid"><article class="empty-card"><strong>Chargement…</strong><span>Recherche de vos sessions.</span></article></div></article></section></main><script type="module" src="assets/js/index.js"></script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GlowUp — Modulys</title>
+  <meta name="description" content="Transformez les téléphones du public en show lumineux interactif avec un QR code.">
+  <meta name="theme-color" content="#7c3aed">
+  <link rel="icon" href="assets/img/module-glowup.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;650;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a class="brand" href="index.html"><span class="brand-mark">✨</span><span>GlowUp</span></a>
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="https://modulys.top/mes-modules.html">Mes modules</a>
+        <button id="logoutBtn" class="btn btn-ghost" type="button">Déconnexion</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container hero">
+      <section>
+        <p class="eyebrow">Module Modulys</p>
+        <h1>Le public devient la lumière du spectacle.</h1>
+        <p class="lead">Créez une session, partagez un QR code et lancez des effets lumineux en direct sur les téléphones des participants.</p>
+        <div class="stat-grid">
+          <article class="stat"><strong>30</strong><span>participants gratuits</span></article>
+          <article class="stat"><strong>3×3</strong><span>zones possibles</span></article>
+          <article class="stat"><strong>24h</strong><span>session active</span></article>
+        </div>
+        <div class="warning"><p><strong>Prévention :</strong> GlowUp utilise des écrans colorés. Évitez les flashs rapides et prévenez le public sensible à la lumière.</p></div>
+      </section>
+      <aside class="hero-visual" aria-hidden="true">
+        <div class="arena"><i class="phone-dot p1"></i><i class="phone-dot p2"></i><i class="phone-dot p3"></i><i class="phone-dot p4"></i><i class="phone-dot p5"></i></div>
+      </aside>
+    </div>
+
+    <section class="container grid two" style="margin-top:32px">
+      <article class="card">
+        <div class="dashboard-head">
+          <div>
+            <p class="eyebrow">Créer</p>
+            <h2>Nouvelle session GlowUp</h2>
+            <p>Connecté : <strong id="userEmail">—</strong> · Plan : <strong id="planLabel">—</strong></p>
+          </div>
+        </div>
+        <form id="createForm">
+          <div class="field">
+            <label for="title">Titre de l’événement</label>
+            <input id="title" name="title" required maxlength="120" placeholder="Final du spectacle">
+          </div>
+          <div class="field">
+            <label for="subtitle">Sous-titre</label>
+            <input id="subtitle" name="subtitle" maxlength="160" placeholder="Gardez votre téléphone allumé pendant le show">
+          </div>
+          <div class="field">
+            <label for="eventDate">Date de l’événement</label>
+            <input id="eventDate" name="eventDate" type="date">
+          </div>
+
+          <section class="placement-box">
+            <p class="eyebrow">Placement public</p>
+            <h3>Comment les invités se placent-ils ?</h3>
+            <label class="check-row">
+              <input type="checkbox" name="depthEnabled" checked>
+              <span>Activer Devant / Milieu / Derrière</span>
+            </label>
+            <label class="check-row">
+              <input type="checkbox" name="rowsEnabled" id="rowsEnabled">
+              <span>Activer les numéros de rangée</span>
+            </label>
+            <div class="field compact-field" id="rowCountField" hidden>
+              <label for="rowCount">Nombre de rangées</label>
+              <input id="rowCount" name="rowCount" type="number" min="1" max="80" value="10">
+            </div>
+            <p class="mini-help">Les invités pourront modifier leur emplacement depuis leur téléphone si besoin.</p>
+          </section>
+
+          <label class="warning" style="display:block"><input type="checkbox" name="warningAccepted" required> J’ai prévu d’avertir le public en cas d’effets lumineux et d’éviter les flashs trop rapides.</label>
+          <br>
+          <button class="btn btn-primary" type="submit">Créer la session</button>
+          <p id="status" class="status" role="status"></p>
+        </form>
+        <div id="limitBox"></div>
+      </article>
+
+      <article class="card">
+        <p class="eyebrow">Mes sessions</p>
+        <h2>Shows créés</h2>
+        <div id="sessionsList" class="grid"><article class="empty-card"><strong>Chargement…</strong><span>Recherche de vos sessions.</span></article></div>
+      </article>
+    </section>
+  </main>
+  <script type="module" src="assets/js/index.js"></script>
+</body>
+</html>
