@@ -9,6 +9,17 @@ export const $$ = (selector, root = document) => [...root.querySelectorAll(selec
 export const ZONE_LABELS = { left: "Gauche", center: "Centre", right: "Droite" };
 export const DEPTH_LABELS = { front: "Devant", middle: "Milieu", back: "Derrière" };
 
+export function friendlyErrorMessage(error, fallback = "Une erreur est survenue, veuillez réessayer.") {
+  const raw = String(error?.message || "");
+  const code = String(error?.code || "").toLowerCase();
+  if (code.includes("permission-denied") || /permission_denied|permission denied|missing or insufficient/i.test(raw)) return "Accès non autorisé.";
+  if (code.includes("unauthenticated")) return "Connexion nécessaire.";
+  if (code.includes("not-found")) return "Session introuvable.";
+  if (/limite de l’offre|limite de participants/i.test(raw)) return raw;
+  const technical = /firebase|cloud functions|internal|bad request|cannot read properties|undefined|null|quota/i.test(raw);
+  return technical ? fallback : (raw || fallback);
+}
+
 export function escapeHtml(value = "") {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -112,7 +123,7 @@ export async function createSession({
   if (!user) throw new Error("Connexion requise.");
   const limits = access?.limits || { eventsPerPeriod: 1, participantsPerEvent: 30, quotaPeriod: "month" };
   const billingPeriod = access?.billingPeriod;
-  if (!billingPeriod) throw new Error("Période de quota indisponible.");
+  if (!billingPeriod) throw new Error("Période d’utilisation indisponible.");
 
   const usagePath = `usage/${user.uid}/${billingPeriod}/${MODULE_ID}`;
   const usageSnap = await get(ref(db, `${usagePath}/eventsCreated`));
@@ -123,7 +134,7 @@ export async function createSession({
     err.code = "modulys/free-limit-reached";
     err.limits = limits;
     err.period = billingPeriod;
-    err.offerName = access?.plan?.name || access?.planId || "Gratuit";
+    err.offerName = access?.plan?.name || offerLabelFromPlanId(access?.planId);
     throw err;
   }
 

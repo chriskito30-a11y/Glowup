@@ -6,7 +6,8 @@ import {
   startHeartbeat,
   updateParticipantPlacement,
   normalizePlacementConfig,
-  targetLabel
+  targetLabel,
+  friendlyErrorMessage
 } from "./core.js";
 
 const params = new URLSearchParams(location.search);
@@ -154,7 +155,7 @@ async function boot() {
     $("#joinSubtitle").textContent = session.subtitle || "Le public devient la lumière du spectacle.";
     applySessionPlacementOptions(session);
   } catch (error) {
-    setStatus(error.message || "Session indisponible.", "error");
+    setStatus(friendlyErrorMessage(error, "Animation indisponible."), "error");
   }
 }
 
@@ -183,7 +184,7 @@ $("#joinForm")?.addEventListener("submit", async event => {
     });
     if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {});
   } catch (error) {
-    setStatus(error.message || "Impossible de rejoindre cette session.", "error");
+    setStatus(friendlyErrorMessage(error, "Impossible de rejoindre cette animation."), "error");
   }
 });
 

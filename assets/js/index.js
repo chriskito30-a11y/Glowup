@@ -43,7 +43,7 @@ async function boot() {
   currentUser = result.user;
   currentAccess = result.access;
   $("#userEmail").textContent = currentUser?.email || "Compte connecté";
-  $("#planLabel").textContent = currentAccess?.plan?.name || (currentAccess?.unlimited ? "Administrateur" : currentAccess?.planId || "Gratuit");
+  $("#planLabel").textContent = currentAccess?.plan?.name || (currentAccess?.unlimited ? "Administrateur" : "Offre Découverte");
   await loadSessions();
 }
 
@@ -71,7 +71,7 @@ $("#createForm")?.addEventListener("submit", async event => {
       setStatus("");
       return;
     }
-    setStatus(error.message || "Impossible de créer la session.", "error");
+    setStatus(friendlyErrorMessage(error, "Impossible de créer l’animation."), "error");
   }
 });
 

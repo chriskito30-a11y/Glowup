@@ -10,7 +10,8 @@ import {
   qrUrl,
   currentEffectPayload,
   normalizePlacementConfig,
-  targetLabel
+  targetLabel,
+  friendlyErrorMessage
 } from "./core.js";
 
 const params = new URLSearchParams(location.search);
@@ -142,7 +143,7 @@ $("#sequenceBtn")?.addEventListener("click", async () => {
     sequenceTimers.push(stopTimer);
     setStatus(`Séquence lancée : ${targets.length} étape(s).`, "success");
   } catch (error) {
-    setStatus(error.message || "Impossible de lancer la séquence.", "error");
+    setStatus(friendlyErrorMessage(error, "Impossible de lancer la séquence."), "error");
   }
 });
 

@@ -95,12 +95,12 @@ function resolveLimits(moduleKey, planId, moduleData = {}, planData = {}) {
 async function resolveBillingPeriod(planId, limits, entitlement = {}) {
   if (limits.quotaPeriod === "grant") {
     const grantId = entitlementGrantId(entitlement);
-    if (!/^grant-[A-Za-z0-9_-]{6,58}$/.test(grantId)) throw new Error("Ce pass événement ne possède pas d’identifiant de quota valide.");
+    if (!/^grant-[A-Za-z0-9_-]{6,58}$/.test(grantId)) throw new Error("Ce Pass événement est indisponible. Veuillez réessayer ou contacter l’organisateur.");
     return grantId;
   }
   const periodName = limits.quotaPeriod === "year" ? "year" : "month";
   const periodSnap = await get(ref(db, `quotaPeriods/${periodName}`));
-  if (!periodSnap.exists()) throw new Error(`Période de quota ${periodName} non configurée dans Firebase.`);
+  if (!periodSnap.exists()) throw new Error("Période d’utilisation indisponible. Veuillez réessayer.");
   return String(periodSnap.val());
 }
 
@@ -176,7 +176,7 @@ export function upgradeOfferHtml(moduleKey, error = {}) {
       <a class="btn btn-primary" href="https://modulys.top/#tarifs" target="_blank" rel="noopener">Voir les offres</a>
       <a class="btn btn-secondary" href="https://modulys.top/#contact" target="_blank" rel="noopener">Débloquer mon accès</a>
     </div>
-    <small>Options prévues : Pass événement, abonnement mensuel, annuel ou Lifetime.</small>
+    <small>Options disponibles : Pass événement, Abonnement mensuel, Abonnement annuel ou Lifetime.</small>
   </div>`;
 }
 
@@ -190,8 +190,8 @@ export function renderFreeLimitUpgrade(target, moduleKey, error = {}) {
 function reasonLabel(reason) {
   return {
     not_authenticated: "Vous devez vous connecter avec votre compte Modulys pour ouvrir ce module.",
-    anonymous_not_allowed: "Vous utilisez actuellement une session invité. Connectez-vous avec votre vrai compte Modulys pour créer ou gérer une session.",
-    module_not_declared: "GlowUp n’est pas encore déclaré dans Firebase.",
+    anonymous_not_allowed: "Vous utilisez actuellement un accès invité. Connectez-vous avec votre compte Modulys pour créer ou gérer une session.",
+    module_not_declared: "GlowUp est temporairement indisponible.",
     module_inactive: "GlowUp est actuellement désactivé.",
     plan_inactive: "L’offre associée à votre compte est actuellement désactivée.",
     no_grant: "Votre compte ne possède pas encore les droits pour ce module."
